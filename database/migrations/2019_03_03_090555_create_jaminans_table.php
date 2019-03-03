@@ -28,11 +28,11 @@ class CreateJaminansTable extends Migration
 			$table->string('no_kontrak',30);
 			$table->string('uraian_pekerjaan')->nullable();
             $table->string('currency',3);
-			$table->float('amount', 17, 2);
+			$table->float('nilai_jaminan', 17, 2);
 			$table->date('tgl_terbit');
 			$table->date('tgl_berlaku');
 			$table->date('tgl_berakhir');
-			$table->date('tgl_claim');
+			$table->date('tgl_claim')->nullable();
 			$table->string('nama_file_jaminan');
             $table->string('nama_user');
             $table->string('email',50);

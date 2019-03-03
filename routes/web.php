@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 Route::get('/jaminan','ControllerJaminan@index');
 Route::get('/jaminan/{id}','ControllerJaminan@show');
+Route::post('/jaminan/store','ControllerJaminan@store');
