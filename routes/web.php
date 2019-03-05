@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/jaminan','ControllerJaminan@index');
-Route::get('/jaminan/{id}','ControllerJaminan@show');
-Route::post('/jaminan/store','ControllerJaminan@store');
+Route::group(['middleware' => 'auth:api'], function(){
+	Route::get('/jaminan','ControllerJaminan@index');
+	Route::get('/jaminan/{id}','ControllerJaminan@show');
+	Route::post('/jaminan/store','ControllerJaminan@store');
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Jaminan;
+use Carbon\Carbon;
 
 class ControllerJaminan extends Controller
 {
@@ -46,7 +47,8 @@ class ControllerJaminan extends Controller
      */
     public function store(Request $request)
     {
-//dd($request);
+//return response($request);
+//dd( JSON.stringify($request));	
 		$tgl_kirim = $request->input('tgl_kirim');
 		$bank_penerbit = $request->input('bank_penerbit');
 		$alamat_bank_penerbit = $request->input('alamat_bank_penerbit');
@@ -93,6 +95,14 @@ class ControllerJaminan extends Controller
         $data->nama_user = $nama_user;
         $data->email = $email;
 		$data->status = '0';
+		
+		 if ($request->nama_file_jaminan != null) {
+            $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+            $name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_jaminan->getClientOriginalExtension();
+            $request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
+
+            $data->nama_file_jaminan = $name;
+        }
 		
 		$data2 = Jaminan::where('nomor_jaminan', $nomor_jaminan)->get();
 		if(count($data2) > 0){
