@@ -18,4 +18,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/jaminan','ControllerJaminan@index');
 	Route::get('/jaminan/{id}','ControllerJaminan@show');
 	Route::post('/jaminan/store','ControllerJaminan@store');
+	Route::post('/validity/store','ControllerJaminan@update');
 });

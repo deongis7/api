@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\JaminanStoreRequest;
+use App\Http\Requests\ValidityStoreRequest;
 use App\Jaminan;
 use Carbon\Carbon;
 
@@ -165,9 +166,51 @@ class ControllerJaminan extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidityStoreRequest $request)
     {
         //
+		$no_validity = $request->input('no_validity');
+		$penanda_tangan = $request->input('penanda_tangan');
+		$jabatan_penanda_tangan = $request->input('jabatan_penanda_tangan');
+		$nomor_jaminan = $request->input('nomor_jaminan');
+		$tgl_konfirmasi = $request->input('tgl_konfirmasi');
+		$nama_file_validity = $request->input('nama_file_validity');
+		
+
+		$data = new Jaminan();
+		$data = Jaminan::where('nomor_jaminan', $nomor_jaminan )->first();
+		if(count($data) > 0)
+		{
+			$data->no_validity= $no_validity;
+			$data->penanda_tangan = $penanda_tangan;
+			$data->jabatan_penanda_tangan = $jabatan_penanda_tangan;
+			$data->tgl_konfirmasi =$tgl_konfirmasi;
+			$data->nama_file_validity = $nama_file_validity;
+			
+			 if ($request->nama_file_validity != null) {
+				$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+				$name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_validity->getClientOriginalExtension();
+				$request->nama_file_validity->move(storage_path() . '/upload/surar_pernyataan/', $name);
+
+				$data->nama_file_validity = $name;
+			}
+							
+				if($data->update()){
+					$res['status'] = "success";
+					$res['data'] = "$data";
+					return response($res);	
+				} else {
+					 return response()->json([
+					'status' => 'error',
+					
+				]);
+				} 
+		} else {
+				return response()->json([
+				'status' => 'fail',
+				'data' => ['nomor_jaminan' => 'Nomor Jaminan tidak Ditemukan'],
+			]);
+		}
     }
 
     /**
