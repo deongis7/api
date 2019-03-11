@@ -73,57 +73,97 @@ class ControllerJaminan extends Controller
         $nama_user = $request->input('nama_user');
         $email = $request->input('email');
 
-		$data = new Jaminan();
-
-		$data->tgl_kirim= $tgl_kirim;
-		$data->bank_penerbit = $bank_penerbit;
-		$data->alamat_bank_penerbit = $alamat_bank_penerbit;
-		$data->nomor_jaminan =$nomor_jaminan;
-		$data->nomor_ref = $nomor_ref;
-		$data->jenis_jaminan =$jenis_jaminan;
-		$data->jenis_produk = $jenis_produk;
-		$data->beneficary = $beneficary;
-		$data->unit_pengguna = $unit_pengguna;
-		$data->applicant = $applicant;
-		$data->no_kontrak = $no_kontrak;
-		$data->uraian_pekerjaan =$uraian_pekerjaan;
-        $data->currency = $currency;
-		$data->nilai_jaminan = $nilai_jaminan;
-		$data->tgl_terbit = $tgl_terbit;
-		$data->tgl_berlaku =$tgl_berlaku;
-		$data->tgl_berakhir = $tgl_berakhir;
-		$data->tgl_claim =$tgl_claim;
-		$data->nama_file_jaminan = $nama_file_jaminan;
-        $data->nama_user = $nama_user;
-        $data->email = $email;
-		$data->status = '0';
 		
-		 if ($request->nama_file_jaminan != null) {
-            $timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-            $name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_jaminan->getClientOriginalExtension();
-            $request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
+		$data = Jaminan::where('nomor_jaminan', $nomor_jaminan)->first();
+		if(count($data) > 0){
+			$data->tgl_kirim= $tgl_kirim;
+			$data->bank_penerbit = $bank_penerbit;
+			$data->alamat_bank_penerbit = $alamat_bank_penerbit;
+			$data->nomor_ref = $nomor_ref;
+			$data->jenis_jaminan =$jenis_jaminan;
+			$data->jenis_produk = $jenis_produk;
+			$data->beneficary = $beneficary;
+			$data->unit_pengguna = $unit_pengguna;
+			$data->applicant = $applicant;
+			$data->no_kontrak = $no_kontrak;
+			$data->uraian_pekerjaan =$uraian_pekerjaan;
+			$data->currency = $currency;
+			$data->nilai_jaminan = $nilai_jaminan;
+			$data->tgl_terbit = $tgl_terbit;
+			$data->tgl_berlaku =$tgl_berlaku;
+			$data->tgl_berakhir = $tgl_berakhir;
+			$data->tgl_claim =$tgl_claim;
+			$data->nama_file_jaminan = $nama_file_jaminan;
+			$data->nama_user = $nama_user;
+			$data->email = $email;
+			if ($request->nama_file_jaminan != null) {
+				$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+				$name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_jaminan->getClientOriginalExtension();
+				$request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
 
-            $data->nama_file_jaminan = $name;
-        }
-		
-		$data2 = Jaminan::where('nomor_jaminan', $nomor_jaminan)->get();
-		if(count($data2) > 0){
-			 return response()->json([
-				'status' => 'fail',
-				'data' => ['nomor_jaminan' => 'Nomor Jaminan telah Terdaftar'],
-			]);
-		} else {			
-			if($data->save()){
+				$data->nama_file_jaminan = $name;
+			}
+			if($data->update()){
+				$res['code'] = "200";
 				$res['status'] = "success";
-				$res['data'] = "$data";
-				return response($res);	
+				$res['message'] = "Data berhasil di Update";
+				$res['data'] = $data;
+				return response($res,200);	
+			} else {
+				 return response()->json([
+				'status' => 'error',	
+				]);
+			}
+			
+		}	else {
+			$data = new Jaminan();
+			$data->tgl_kirim= $tgl_kirim;
+			$data->bank_penerbit = $bank_penerbit;
+			$data->alamat_bank_penerbit = $alamat_bank_penerbit;
+			$data->nomor_jaminan =$nomor_jaminan;
+			$data->nomor_ref = $nomor_ref;
+			$data->jenis_jaminan =$jenis_jaminan;
+			$data->jenis_produk = $jenis_produk;
+			$data->beneficary = $beneficary;
+			$data->unit_pengguna = $unit_pengguna;
+			$data->applicant = $applicant;
+			$data->no_kontrak = $no_kontrak;
+			$data->uraian_pekerjaan =$uraian_pekerjaan;
+			$data->currency = $currency;
+			$data->nilai_jaminan = $nilai_jaminan;
+			$data->tgl_terbit = $tgl_terbit;
+			$data->tgl_berlaku =$tgl_berlaku;
+			$data->tgl_berakhir = $tgl_berakhir;
+			$data->tgl_claim =$tgl_claim;
+			$data->nama_file_jaminan = $nama_file_jaminan;
+			$data->nama_user = $nama_user;
+			$data->email = $email;
+			
+			if ($request->nama_file_jaminan != null) {
+				$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
+				$name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_jaminan->getClientOriginalExtension();
+				$request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
+
+				$data->nama_file_jaminan = $name;
+			}
+			$data->status = '0';			
+			if($data->save()){
+				$res['code'] = "201";
+				$res['status'] = "created";
+				$res['message'] = "Data berhasil di Simpan";
+				$res['data'] = $data;
+				return response($res,201);	
 			} else {
 				 return response()->json([
 				'status' => 'error',
 				
 			]);
 			}
-		}
+		
+		}			
+		
+		
+
     }
 
     /**
@@ -196,9 +236,11 @@ class ControllerJaminan extends Controller
 			}
 							
 				if($data->update()){
-					$res['status'] = "success";
-					$res['data'] = "$data";
-					return response($res);	
+				$res['code'] = "200";
+				$res['status'] = "success";
+				$res['message'] = "Data berhasil di Simpan";
+				$res['data'] = $data;
+				return response($res,200);	
 				} else {
 					 return response()->json([
 					'status' => 'error',
@@ -223,4 +265,6 @@ class ControllerJaminan extends Controller
     {
         //
     }
+	
+
 }

@@ -15,7 +15,8 @@
         "sentry/sentry": "~1.6",
         "optimus/heimdal": "~1.0",
         "laravel/passport": "^3.0",
-        "optimus/api-consumer": "0.2.*"
+        "optimus/api-consumer": "0.2.*",
+		"guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

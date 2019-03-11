@@ -20,3 +20,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/jaminan/store','ControllerJaminan@store');
 	Route::post('/validity/store','ControllerJaminan@update');
 });
+
+//Route::get('/tes','ControllerJaminan@tes');
