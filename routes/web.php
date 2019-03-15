@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,5 +23,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/jaminan/store','ControllerJaminan@store');
 	Route::post('/validity/store','ControllerJaminan@update');
 });
+
 
 //Route::get('/tes','ControllerJaminan@tes');
