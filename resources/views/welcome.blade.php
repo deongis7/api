@@ -82,7 +82,10 @@
                     API ABG - AJO
                 </div>
 
-
+                <div class="links">
+                    <a href="{{ url('/help') }}">Documentation</a>
+                  
+                </div>
             </div>
         </div>
     </body>

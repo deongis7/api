@@ -17,6 +17,8 @@ Route::get('/phpinfo', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/help','ControllerDocument@getDownload');
+
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/jaminan','ControllerJaminan@index');
 	Route::get('/jaminan/{id}','ControllerJaminan@show');

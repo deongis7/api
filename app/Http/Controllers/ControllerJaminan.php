@@ -20,14 +20,18 @@ class ControllerJaminan extends Controller
         $data = Jaminan::all();
 
 		if(count($data) > 0){ //mengecek apakah data kosong atau tidak
+			$res['code'] = "200";
 			$res['status'] = "success";
 			$res['data'] = $data;
-			return response($res);
+			return response($res,200);
 		}
 		else{
-			$res['status'] = "success";
+			$res['code'] = "404";
+			$res['status'] = "error";
+			$res['error'] = "Not Found";
+			$res['message'] = "Data tidak Ada";
 			$res['data'] = null;
-			return response($res);
+			return response($res,404);
 		}
     }
 
@@ -97,8 +101,8 @@ class ControllerJaminan extends Controller
 			$data->nama_user = $nama_user;
 			$data->email = $email;
 			if ($request->nama_file_jaminan != null) {
-				$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-				$name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_jaminan->getClientOriginalExtension();
+				$timestamp = str_replace([' ', ':'], '', Carbon::now()->toDateTimeString());
+				$name = $timestamp . '-'.  $request->nama_file_jaminan->getClientOriginalName();
 				$request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
 
 				$data->nama_file_jaminan = $name;
@@ -111,8 +115,11 @@ class ControllerJaminan extends Controller
 				return response($res,200);	
 			} else {
 				 return response()->json([
-				'status' => 'error',	
-				]);
+					'code' => '500',
+					'status' => 'error',
+					'error' => 'Internal Server Error',
+					'message' => 'Tidak dapat Diproses',
+				],500);
 			}
 			
 		}	else {
@@ -140,8 +147,8 @@ class ControllerJaminan extends Controller
 			$data->email = $email;
 			
 			if ($request->nama_file_jaminan != null) {
-				$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-				$name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_jaminan->getClientOriginalExtension();
+				$timestamp = str_replace([' ', ':'], '', Carbon::now()->toDateTimeString());
+				$name = $timestamp . '-'.  $request->nama_file_jaminan->getClientOriginalName();
 				$request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
 
 				$data->nama_file_jaminan = $name;
@@ -155,9 +162,11 @@ class ControllerJaminan extends Controller
 				return response($res,201);	
 			} else {
 				 return response()->json([
-				'status' => 'error',
-				
-			]);
+					'code' => '500',
+					'status' => 'error',
+					'error' => 'Internal Server Error',
+					'message' => 'Tidak dapat Diproses',
+				],500);
 			}
 		
 		}			
@@ -177,14 +186,18 @@ class ControllerJaminan extends Controller
         $data = Jaminan::where('id',$id)->get();
 
 		if(count($data) > 0){ //mengecek apakah data kosong atau tidak
+			$res['code'] = "200";
 			$res['status'] = "success";
 			$res['data'] = $data;
-			return response($res);
+			return response($res,200);
 		}
 		else{
-			$res['status'] = "success";
+			$res['code'] = "404";
+			$res['status'] = "error";
+			$res['error'] = "Not Found";
+			$res['message'] = "Data tidak Ada";
 			$res['data'] = null;
-			return response($res);
+			return response($res,404);
 		}
     }
 
@@ -228,8 +241,8 @@ class ControllerJaminan extends Controller
 			$data->nama_file_validity = $nama_file_validity;
 			
 			 if ($request->nama_file_validity != null) {
-				$timestamp = str_replace([' ', ':'], '-', Carbon::now()->toDateTimeString());
-				$name = $timestamp . '-'. $nomor_jaminan . "." . $request->nama_file_validity->getClientOriginalExtension();
+				$timestamp = str_replace([' ', ':'], '', Carbon::now()->toDateTimeString());
+				$name = $timestamp . '-'.  $request->nama_file_validity->getClientOriginalName();
 				$request->nama_file_validity->move(storage_path() . '/upload/surar_pernyataan/', $name);
 
 				$data->nama_file_validity = $name;
@@ -243,15 +256,19 @@ class ControllerJaminan extends Controller
 				return response($res,200);	
 				} else {
 					 return response()->json([
+					'code' => '500',
 					'status' => 'error',
-					
-				]);
+					'error' => 'Internal Server Error',
+					'message' => 'Tidak dapat Diproses',
+				],500);
 				} 
 		} else {
 				return response()->json([
-				'status' => 'fail',
-				'data' => ['nomor_jaminan' => 'Nomor Jaminan tidak Ditemukan'],
-			]);
+				'code' => '404',
+				'status' => 'error',
+				'error' => 'Not Found',
+				'message' => ['nomor_jaminan' => 'Nomor Jaminan tidak Ditemukan'],
+			],404);
 		}
     }
 
