@@ -19,12 +19,23 @@ class ControllerDocument extends Controller
     //PDF file is stored under project/public/download/info.pdf
     $file= storage_path() . "/download/help.pdf";
 
-$headers = [
-              'Content-Type' => 'application/pdf',
-           ];
+	$headers = [
+				  'Content-Type' => 'application/pdf',
+			   ];
 
-return response()->download($file, 'Panduan Teknis Integrasi.pdf', $headers);
+	return response()->download($file, 'Panduan Teknis Integrasi.pdf', $headers);
 }
 	
+public function getDownloadFAQ()
+{
+    //PDF file is stored under project/public/download/info.pdf
+    $file= storage_path() . "/download/faq.pdf";
+
+	$headers = [
+				  'Content-Type' => 'application/pdf',
+			   ];
+
+	return response()->download($file, 'FAQ.pdf', $headers);
+}
 
 }

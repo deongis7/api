@@ -84,6 +84,8 @@
 
                 <div class="links">
                     <a href="{{ url('/help') }}">Documentation</a>
+                    <a href="{{ url('/faq') }}">FAQ</a>
+					<a href="https://www.getpostman.com/downloads/">Get Postman</a>
                   
                 </div>
             </div>

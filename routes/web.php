@@ -18,12 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/help','ControllerDocument@getDownload');
+Route::get('/faq','ControllerDocument@getDownloadFAQ');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/jaminan','ControllerJaminan@index');
 	Route::get('/jaminan/{id}','ControllerJaminan@show');
 	Route::post('/jaminan/store','ControllerJaminan@store');
 	Route::post('/validity/store','ControllerJaminan@update');
+	Route::post('/jaminan/json/store','ControllerJaminanJSON@store');
+	Route::post('/validity/json/store','ControllerJaminanJSON@update');
 });
 
 

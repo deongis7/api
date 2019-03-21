@@ -7,8 +7,9 @@ use App\Http\Requests\JaminanStoreRequest;
 use App\Http\Requests\ValidityStoreRequest;
 use App\Jaminan;
 use Carbon\Carbon;
+use Validator;
 
-class ControllerJaminan extends Controller
+class ControllerJaminanJSON extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -53,8 +54,9 @@ class ControllerJaminan extends Controller
      */
     public function store(JaminanStoreRequest $request)
     {
-//return response($request);
-//dd( JSON.stringify($request));	
+
+
+
 		$tgl_kirim = $request->input('tgl_kirim');
 		$bank_penerbit = $request->input('bank_penerbit');
 		$alamat_bank_penerbit = $request->input('alamat_bank_penerbit');
@@ -73,11 +75,11 @@ class ControllerJaminan extends Controller
 		$tgl_berlaku = $request->input('tgl_berlaku');
 		$tgl_berakhir = $request->input('tgl_berakhir');
 		$tgl_claim = $request->input('tgl_claim');
-		$nama_file_jaminan = $request->input('nama_file_jaminan');
+		$nama_file_jaminan = ($request->input('nama_file_jaminan'));
         $nama_user = $request->input('nama_user');
         $email = $request->input('email');
 
-		
+		//dd(base64_decode($request->input('nama_file_jaminan')));
 		$data = Jaminan::where('nomor_jaminan', $nomor_jaminan)->first();
 		if(count($data) > 0){
 			$data->tgl_kirim= $tgl_kirim;
@@ -102,10 +104,11 @@ class ControllerJaminan extends Controller
 			$data->email = $email;
 			if ($request->nama_file_jaminan != null) {
 				$timestamp = str_replace([' ', ':'], '', Carbon::now()->toDateTimeString());
-				$name = $timestamp . '-'.  $request->nama_file_jaminan->getClientOriginalName();
-				$request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
+				$image = str_replace('data:application/pdf;base64,', '', $nama_file_jaminan); 	 
+				$nama_file_jaminan = $timestamp . '-'.str_random(10).'.'.'pdf';
+				\File::put(storage_path(). '/upload/jaminan/' . $nama_file_jaminan, base64_decode($image));
 
-				$data->nama_file_jaminan = $name;
+				$data->nama_file_jaminan = $nama_file_jaminan;
 			}
 			if($data->update()){
 				$res['code'] = "200";
@@ -148,10 +151,11 @@ class ControllerJaminan extends Controller
 			
 			if ($request->nama_file_jaminan != null) {
 				$timestamp = str_replace([' ', ':'], '', Carbon::now()->toDateTimeString());
-				$name = $timestamp . '-'.  $request->nama_file_jaminan->getClientOriginalName();
-				$request->nama_file_jaminan->move(storage_path() . '/upload/jaminan/', $name);
-
-				$data->nama_file_jaminan = $name;
+				$image = str_replace('data:application/pdf;base64,', '', $nama_file_jaminan); 	 
+				$nama_file_jaminan = $timestamp . '-'.str_random(10).'.'.'pdf';
+				\File::put(storage_path(). '/upload/jaminan/' . $nama_file_jaminan, base64_decode($image));
+				
+				$data->nama_file_jaminan = $nama_file_jaminan;
 			}
 			$data->status = '0';			
 			if($data->save()){
@@ -219,7 +223,7 @@ class ControllerJaminan extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidityStoreRequest $request)
+    public function update(Request $request)
     {
         //
 		$no_validity = $request->input('no_validity');
@@ -227,7 +231,7 @@ class ControllerJaminan extends Controller
 		$jabatan_penanda_tangan = $request->input('jabatan_penanda_tangan');
 		$nomor_jaminan = $request->input('nomor_jaminan');
 		$tgl_konfirmasi = $request->input('tgl_konfirmasi');
-		$nama_file_validity = $request->input('nama_file_validity');
+		$nama_file_validity = base64_decode($request->input('nama_file_validity'));
 		
 
 		$data = new Jaminan();
@@ -242,10 +246,12 @@ class ControllerJaminan extends Controller
 			
 			 if ($request->nama_file_validity != null) {
 				$timestamp = str_replace([' ', ':'], '', Carbon::now()->toDateTimeString());
-				$name = $timestamp . '-'.  $request->nama_file_validity->getClientOriginalName();
-				$request->nama_file_validity->move(storage_path() . '/upload/surat_pernyataan/', $name);
+				$image = str_replace('data:application/pdf;base64,', '', $nama_file_validity); 	 
+				$nama_file_validity = $timestamp . '-'.str_random(10).'.'.'pdf';
+				\File::put(storage_path(). '/upload/jaminan/' . $nama_file_validity, base64_decode($image));
 
-				$data->nama_file_validity = $name;
+				$data->nama_file_validity = $nama_file_validity;
+				
 			}
 							
 				if($data->update()){
