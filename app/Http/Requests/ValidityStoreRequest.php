@@ -28,7 +28,7 @@ class ValidityStoreRequest extends FormRequest
           'penanda_tangan' => 'required|max:255',
           'jabatan_penanda_tangan' => 'required|max:255',	  
 		  'tgl_konfirmasi' => 'required',
-          'nama_file_validity' => 'required|mimes:pdf',
+          'nama_file_validity' => 'required|base64mimes:pdf',
      
         ];
     }
@@ -44,7 +44,7 @@ class ValidityStoreRequest extends FormRequest
 			'no_validity.max' => 'No. Validity harus Maximal 30 Karakter!',
 			'penanda_tangan.max' => 'Penanda Tangan harus Maximal 255 Karakter!',
             'jabatan_penanda_tangan.max' => 'Jabatan Penanda Tangan harus Maximal 255 Karakter!',
-			'nama_file_validity.mimes' => 'File Validity harus tipe PDF!',
+			'nama_file_validity.base64mimes' => 'File Validity harus tipe PDF!',
             
             
         ];

@@ -40,9 +40,9 @@ class JaminanStoreRequest extends FormRequest
           'tgl_terbit' => 'required',
           'tgl_berlaku' => 'required',
           'tgl_berakhir' => 'required',
-          'nama_file_jaminan' => 'required|mimes:pdf',
+          'nama_file_jaminan' => 'required|base64mimes:pdf',
           'nama_user' => 'required',
-          'email' => 'required'      
+          'email' => 'required',	  
         ];
     }
 	
@@ -79,7 +79,7 @@ class JaminanStoreRequest extends FormRequest
 			'no_kontrak.max' => 'No Kontrak harus Maximal 30 Karakter!',
 			'currency.max' => 'Currency harus Maximal 3 Karakter!',
 			'nilai_jaminan.max' => 'Nilai Jaminan harus Maximal 17 Karakter!',
-			'nama_file_jaminan.mimes' => 'File Jaminan harus tipe PDF!',
+			'nama_file_jaminan.base64mimes' => 'File Jaminan harus tipe PDF!',
             
         ];
     }

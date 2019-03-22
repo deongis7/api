@@ -67,6 +67,7 @@ return array(
     'Defuse\\Crypto\\' => array($vendorDir . '/defuse/php-encryption/src'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Cron\\' => array($vendorDir . '/mtdowling/cron-expression/src/Cron'),
-    'App\\' => array($baseDir . '/app'),
+    'Crazybooot\\Base64Validation\\' => array($vendorDir . '/crazybooot/base64-validation/src'),
+    'App\\' => array($baseDir . '/app', $vendorDir . '/crazybooot/base64-validation/app'),
     '' => array($vendorDir . '/nesbot/carbon/src'),
 );

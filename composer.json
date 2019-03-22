@@ -6,17 +6,18 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "crazybooot/base64-validation": "^1.0",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-		 "optimus/distributed-laravel": "~0.1",
-        "optimus/bruno": "~3.0",
-        "optimus/genie": "~2.0",
-        "sentry/sentry": "~1.6",
-        "optimus/heimdal": "~1.0",
         "laravel/passport": "^3.0",
+        "laravel/tinker": "~1.0",
         "optimus/api-consumer": "0.2.*",
-		"guzzlehttp/guzzle": "~4.0"
+        "optimus/bruno": "~3.0",
+        "optimus/distributed-laravel": "~0.1",
+        "optimus/genie": "~2.0",
+        "optimus/heimdal": "~1.0",
+        "sentry/sentry": "~1.6"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

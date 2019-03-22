@@ -55,8 +55,6 @@ class ControllerJaminanJSON extends Controller
     public function store(JaminanStoreRequest $request)
     {
 
-
-
 		$tgl_kirim = $request->input('tgl_kirim');
 		$bank_penerbit = $request->input('bank_penerbit');
 		$alamat_bank_penerbit = $request->input('alamat_bank_penerbit');
@@ -171,12 +169,8 @@ class ControllerJaminanJSON extends Controller
 					'error' => 'Internal Server Error',
 					'message' => 'Tidak dapat Diproses',
 				],500);
-			}
-		
+			}		
 		}			
-		
-		
-
     }
 
     /**
@@ -223,7 +217,7 @@ class ControllerJaminanJSON extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ValidityStoreRequest $request)
     {
         //
 		$no_validity = $request->input('no_validity');

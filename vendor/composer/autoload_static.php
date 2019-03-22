@@ -147,6 +147,7 @@ class ComposerStaticInitde2478a1e4e93517904239261e38daec
         'C' => 
         array (
             'Cron\\' => 5,
+            'Crazybooot\\Base64Validation\\' => 28,
         ),
         'A' => 
         array (
@@ -401,9 +402,14 @@ class ComposerStaticInitde2478a1e4e93517904239261e38daec
         array (
             0 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
         ),
+        'Crazybooot\\Base64Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/crazybooot/base64-validation/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+            1 => __DIR__ . '/..' . '/crazybooot/base64-validation/app',
         ),
     );
 
@@ -449,18 +455,23 @@ class ComposerStaticInitde2478a1e4e93517904239261e38daec
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\API\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UserController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\ControllerDocument' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerDocument.php',
         'App\\Http\\Controllers\\ControllerJaminan' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerJaminan.php',
+        'App\\Http\\Controllers\\ControllerJaminanJSON' => __DIR__ . '/../..' . '/app/Http/Controllers/ControllerJaminanJSON.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\JaminanStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/JaminanStoreRequest.php',
+        'App\\Http\\Requests\\ValidityStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ValidityStoreRequest.php',
         'App\\Jaminan' => __DIR__ . '/../..' . '/app/Jaminan.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -476,6 +487,8 @@ class ComposerStaticInitde2478a1e4e93517904239261e38daec
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Laravel\\ServiceProvider' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Crazybooot\\Base64Validation\\Providers\\ServiceProvider' => __DIR__ . '/..' . '/crazybooot/base64-validation/src/Providers/ServiceProvider.php',
+        'Crazybooot\\Base64Validation\\Validators\\Base64Validator' => __DIR__ . '/..' . '/crazybooot/base64-validation/src/Validators/Base64Validator.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',
