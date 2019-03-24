@@ -16,9 +16,9 @@ class AppServiceProvider extends ServiceProvider
 		 //if(env('FORCE_HTTPS')) {
 			//URL::forceScheme('https');
 		//}
-		if (App::environment('remote')) {
-			URL::forceSchema('https');
-		}
+		//if (App::environment('remote')) {
+			//URL::forceSchema('https');
+		//}
     }
 
     /**
