@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\JaminanStoreRequest;
-use App\Http\Requests\ValidityStoreRequest;
+use App\Http\Requests\JaminanJSONStoreRequest;
+use App\Http\Requests\ValidityJSONStoreRequest;
 use App\Jaminan;
 use Carbon\Carbon;
 use Validator;
@@ -52,7 +52,7 @@ class ControllerJaminanJSON extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JaminanStoreRequest $request)
+    public function store(JaminanJSONStoreRequest $request)
     {
 
 		$tgl_kirim = $request->input('tgl_kirim');
@@ -217,7 +217,7 @@ class ControllerJaminanJSON extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidityStoreRequest $request)
+    public function update(ValidityJSONStoreRequest $request)
     {
         //
 		$no_validity = $request->input('no_validity');
