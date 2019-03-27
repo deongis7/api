@@ -79,7 +79,6 @@ class JaminanJSONStoreRequest extends FormRequest
 			'no_kontrak.max' => 'No Kontrak harus Maximal 30 Karakter!',
 			'currency.max' => 'Currency harus Maximal 3 Karakter!',
 			'nilai_jaminan.max' => 'Nilai Jaminan harus Maximal 17 Karakter!',
-			'nama_file_jaminan.base64mimes' => 'File Jaminan harus tipe PDF!',
             
         ];
     }

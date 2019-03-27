@@ -44,7 +44,6 @@ class ValidityJSONStoreRequest extends FormRequest
 			'no_validity.max' => 'No. Validity harus Maximal 30 Karakter!',
 			'penanda_tangan.max' => 'Penanda Tangan harus Maximal 255 Karakter!',
             'jabatan_penanda_tangan.max' => 'Jabatan Penanda Tangan harus Maximal 255 Karakter!',
-			'nama_file_validity.base64mimes' => 'File Validity harus tipe PDF!',
             
             
         ];
